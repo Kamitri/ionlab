@@ -1,7 +1,7 @@
 # Get Started
 
 Ionlab is a **very** simple python package to determine the composition at equilibrium for a solution containing different species. Ionlab assumes the **activity coeffecient of all ions to be 1**, and all other factors considered ideal. Complexation and precipitation are also taken into account, however computation may be inaccurate or may not be possible at all. 
-Equation solving is handled by **GEKKO (pure python)**, or Wolfram Mathematica.
+Equation solving is handled by **GEKKO (no external software required)**, or Wolfram Mathematica.
 To get started, download ionlab through the Python package manager:
 
     pip install ionlab
@@ -41,19 +41,28 @@ I strongly recommend using **Wolfram Mathematica** instead of GEKKO as it is muc
     lab.analyze_eq(solver='wolfram')  # Use wolfram to solve equation
     
 ## More compounds
-Some common compounds have been provided for quick access. Type `cc.` to see a list of common chemicals. Compounds can be declared like below (*untuitive and inconsistent, I know*):
+Some common compounds have been provided for quick access. Type `il.cc.` to see a list of common chemicals. Compounds can be declared like below (*unintuitive and inconsistent, I know*):
 
-    NH3 = Compound(formula='NH3')
+    HCl = il.cc.HCl
+    NH3 = Compound(formula='NH3')  # Declare it yourself
     CdBr2 = Compound(cation='Cd2+', anion='Br-', cation_count=1, anion_count=2)
     H2SO4 = Compound(formula='H2SO4', cation_count=2, anion_count=1)
     H2SO4 = Compound(cation='H+', anion='SO42-', cation_count=2, anion_count=1)
-    
+
+## Adding/editing chemicals' data
+To add new compounds/edit their data, please go to `ionlab/IonicEquilibrium/db/chemicals.db` and manually edit the desired data.
+Then change your current working directory to that same folder `db/` and execute the command:
+`python dbmanage.py dbmake`
 # Limitations
 I made this package when I wasn't the greatest programmer, nor the best chemist. This still hold true, but at least now I can ask someone, maybe. Please be aware that this package may be **buggy**, **incomplete**, **inconsistent**. Honestly, thanks for the reading the docs but trying out this package may **not be the best experience**. But well, if you want to explore, go for it. It is unknown whether I will ever update this package. If maybe someone need it, perhaps.
 **Current limitations**
  - Computation may fail for systems that are too complex, or... just fail in general.
- - Computation may be mildy or wildy inaccurate for systems involving complexation/precipitation.
+ - Computation may be mildly or wildly inaccurate for systems involving complexation/precipitation.
  - Unintuitive design for adding/adjusting chemicals (data).
  - Changing chemicals' constant values during runtime is not available.
  - The ideal assumption is utilized.
- - GEKKO solver (pure python) may be slower at calculating and easier to fail for complex systems.
+ - GEKKO solver (pure python) may be slower at calculating and easier to fail for simple and complex systems.
+ - Pretty much meaningless.
+
+# Authors
+ - Just me, yay.

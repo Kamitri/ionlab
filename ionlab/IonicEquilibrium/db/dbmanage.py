@@ -1,14 +1,20 @@
 import pandas as pd
 import sqlite3
 import os
-import sys
 import traceback
 import argparse
-import warnings
-from pprint import pprint
-from typing import Union, List
-import ionlab.conf as conf
+from typing import Union
 
+# For some reason, import ionlab.conf doesn't work but this method does
+# TODO: Fix this import problem
+import pathlib
+import importlib.util
+import sys
+conf_path = pathlib.Path(os.path.dirname(os.path.abspath(__file__))).parent.parent.joinpath('conf.py')
+spec = importlib.util.spec_from_file_location("conf", conf_path)
+conf = importlib.util.module_from_spec(spec)
+sys.modules["conf"] = conf
+spec.loader.exec_module(conf)
 
 def make_db(path_xlsx: str = conf.Paths.PATH_DB_XLSX, filename_xlsx: str = conf.Paths.FILENAME_DB_XLSX,
             path_sql: str = conf.Paths.PATH_DB_SQL, filename_sql: str = conf.Paths.FILENAME_DB_SQL) -> None:

@@ -6,7 +6,7 @@ from pprint import pprint
 
 import sympy
 
-DB_PATH = 'D:/Coding/Equillum/sentri/db/chemicals.db'
+DB_PATH = ''
 
 
 def make_db(update: str = True, xlsx_path: str = 'chemicals.xlsx', db_path: str = DB_PATH):
@@ -438,19 +438,3 @@ def inspect_formula(formula: str) -> dict:
                 if indices.get(n) is not None:
                     multiplier[indices[n]] = curr_multiplier
     elements = {key: val * multiplier[key] for key, val in elements.items()}
-
-    print(elements)
-    print(multiplier)
-    print('')
-
-    print(loc_elem([elem for elem in elements.keys()][0]))
-
-
-if __name__ == '__main__':
-    args = set(sys.argv)
-    if ('make_db' in args) or ('makedb' in args) or ('create_db' in args) or ('dbmake' in args):
-        try:
-            make_db()
-        except Exception as e:
-            print(e)
-        print('Database creation sucessful!\nNew file created at sentri/db/chemicals.db')

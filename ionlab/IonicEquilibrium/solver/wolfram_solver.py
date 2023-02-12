@@ -88,7 +88,7 @@ class WolframSolver:
             if not self.output_check(eq_molarity_dict):
                 raise Exception
         except Exception as e:
-            print(f'{next_algorithm_key} failed.')
+            # print(f'{next_algorithm_key} failed.')
             self.algorithms.pop(next_algorithm_key)
             return self.compute_eq()
         self.session.terminate()
